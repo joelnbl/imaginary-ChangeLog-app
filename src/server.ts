@@ -1,4 +1,5 @@
 import express from 'express';
+import router from './router';
 
 const app = express();
 
@@ -6,11 +7,6 @@ app.get('/', (req, res) => {
     res.status(200).json({message: 'Hello World!'});
 });
 
-const PORT = process.env.PORT || 3000;
-
-
-app.listen(PORT, () => {       
-    console.log(`listen on http://localhost:${PORT}/`);
-});
+app.use('/api', router);
 
 export default app
