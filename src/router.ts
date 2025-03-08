@@ -1,13 +1,12 @@
-import { Router } from "express";
-
+import { Router, Request, Response } from "express";
 const router = Router();
 
 /*
 ** Product
 */
 
-router.get('/product', (req, res) => {
-    res.json({ message: 'Hello World' });
+router.get('/product', (req: Request, res: Response) => {
+    res.json({ message: 'message' });
 });
 router.get('/product/:id', () => {});
 router.put('/product/:id', () => {});
