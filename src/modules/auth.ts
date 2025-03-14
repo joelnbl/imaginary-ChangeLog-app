@@ -35,7 +35,6 @@ export const protect = (req: AuthenticatedRequest, res: Response, next: NextFunc
     res.send("Not authorized");
     return;
   }
-  console.log(bearer.split(" "), 'HEEEEREEEE!');
   
   const [, token] = bearer.split(" ");
   if (!token) {
