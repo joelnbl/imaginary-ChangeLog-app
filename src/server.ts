@@ -1,4 +1,4 @@
-import express, { NextFunction, Request, Response } from "express";
+import express, { Request, Response } from "express";
 import morgan from 'morgan';
 import cors from 'cors';
 
@@ -30,7 +30,7 @@ app.get('/', (req: Request, res: Response, next) => {
     }, 1000);
 });
 
-app.get('/health', (req: Request, res: Response) => {
+app.get('/health'   , (req: Request, res: Response) => {
     res.status(200).json({message: 'Server is healthy!'});
 });
 
@@ -42,8 +42,13 @@ app.post('/signin', signin)
 
 
 app.use((err, req, res, next) => {
-    console.error(err);
-    res.json({ message: "oops! something went wrong" });
+    if (err.type === 'auth') {
+        res.status(401).json({message: 'Unauthorized'});
+    } else if (err.type === 'input') {
+        res.status(400).json({message: 'Invalid input'});
+    } else {
+        res.status(500).json({message: 'Oops, something went wrong!'});
+    }
 })
 
 export default app
