@@ -3,11 +3,11 @@ import bcrypt from "bcrypt";
 import { Request, Response, NextFunction } from "express";
 
 export const comparePasswords = async (password: string, hashedPassword: string) => {
-  return await bcrypt.compare(password, hashedPassword);
+  return await bcrypt.compareSync(password, hashedPassword);
 };
 
 export const hashPassword = async (password: string) => {
-  return await bcrypt.hash(password, 10);
+  return await bcrypt.hashSync(password, 10);
 };
 
 export const createJWT = (user: any) => {
